@@ -9,15 +9,6 @@
 3. Chat GPT 적극 활용
 4. Git issue 사용해서 개발 중 발생한 issue 적극적으로 공유
 
-#### Frontend(ReactJS)
-- 준유
-- 찬혁
-
-#### Backend(Django)
-- 호진
-- 영찬
-- 기백
-
 ## 🔎사용 기술
 
 ### Languages & Platforms
@@ -26,3 +17,12 @@
 ### Tools
 <img src="https://img.shields.io/badge/Git-F05032?style=flat-square&logo=Git&logoColor=white"/> <img src="https://img.shields.io/badge/Django-092E20?style=flat-square&logo=Django&logoColor=white" />
 
+## 팀원
+#### Frontend(ReactJS)
+- 준유
+- 찬혁
+
+#### Backend(Django)
+- 호진
+- 영찬
+- 기백
