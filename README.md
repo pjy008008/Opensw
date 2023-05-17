@@ -1,13 +1,11 @@
 # OPENSW프로젝트
-## 반드시 읽어주세요!
-
-<br/>
-
 ## 개발 권고사항
 1. 각자 fork한 후 구현 완료되면 PR(Pull Request)
 2. Python venv를 사용한 패키지 관리(Virtual Environment)
 3. Chat GPT 적극 활용
 4. Git issue 사용해서 개발 중 발생한 issue 적극적으로 공유
+
+<br/>
 
 ## 🔎사용 기술
 
@@ -16,6 +14,8 @@
 
 ### Tools
 <img src="https://img.shields.io/badge/Git-F05032?style=flat-square&logo=Git&logoColor=white"/> <img src="https://img.shields.io/badge/Django-092E20?style=flat-square&logo=Django&logoColor=white" />
+
+<br/>
 
 ## 팀원
 #### Frontend(ReactJS)
