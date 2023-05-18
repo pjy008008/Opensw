@@ -2,7 +2,8 @@
 
 
 ### To Do List
-- axios로 backend에 요청
+- axios로 backend에 GET, POST요청
+- submit from 만들기
 
 ### Error, Bug
 
