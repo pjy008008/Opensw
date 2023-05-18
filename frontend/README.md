@@ -2,9 +2,9 @@
 
 
 ### To Do List
-- list 1
+- axios로 backend에 요청
 
 ### Error, Bug
-- bug1
+
 
 #### 해결 시에 삭제 부탁드립니다.
