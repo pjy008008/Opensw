@@ -20,4 +20,11 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('post.urls')),
+    
+    
+    #path('rest-auth/',include('rest_auth.urls')),
+    #path('rest-auth/registration/', include('rest_auth.registration.urls')),
+    #path('accounts/', include('allauth.urls')),
+    path('user/', include("accountdata.urls")),
+    #path('', include('allauth.urls')), #패턴이 중복되면 위에서부터 확인해감
 ]
