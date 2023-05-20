@@ -2,6 +2,9 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
 
+#이메일 인증
+from django.contrib.sites.shortcuts import get_current_site
+from django.urls import reverse
 # Create your models here.
 
 class UserManager(BaseUserManager):
@@ -78,3 +81,4 @@ class appuser(AbstractBaseUser):
     
     def __str__(self):
         return self.email
+    

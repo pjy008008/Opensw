@@ -1,23 +1,33 @@
-from django.contrib.auth.tokens import default_token_generator
-from django.contrib.auth import get_user_model
-from django.shortcuts import redirect
-from django.urls import reverse
-from django.views.generic import TemplateView
+from rest_framework.exceptions import NotFound
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.permissions import AllowAny
+from allauth.account.models import EmailConfirmation, EmailConfirmationHMAC
 
+##현재 사용 안하고 기본 email 인증 사용할거
+class ConfirmEmailView(APIView):
+    permission_classes = [AllowAny]
 
+    def get(self, *args, **kwargs):
+        self.object = confirmation = self.get_object()
+        confirmation.confirm(self.request)
+        # A React Router Route will handle the failure scenario
+        return HttpResponseRedirect('/login/success/')
 
-class AccountActivateView(TemplateView):
-    template_name = 'account_activation.html'
+    def get_object(self, queryset=None):
+        key = self.kwargs['key']
+        email_confirmation = EmailConfirmationHMAC.from_key(key)
+        if not email_confirmation:
+            if queryset is None:
+                queryset = self.get_queryset()
+            try:
+                email_confirmation = queryset.get(key=key.lower())
+            except EmailConfirmation.DoesNotExist:
+                # A React Router Route will handle the failure scenario
+                return HttpResponseRedirect('/login/failure/')
+        return email_confirmation
 
-    def get(self, request, *args, **kwargs):
-        try:
-            uid = int(kwargs['uidb64'])
-            token = kwargs['token']
-            user = get_user_model().objects.get(pk=uid)
-            if default_token_generator.check_token(user, token):
-                user.is_active = True
-                user.save()
-                return redirect(reverse('account-activated'))
-        except (TypeError, ValueError, OverflowError, get_user_model().DoesNotExist):
-            pass
-        return redirect(reverse('account-activation-failed'))
+    def get_queryset(self):
+        qs = EmailConfirmation.objects.all_valid()
+        qs = qs.select_related("email_address__user")
+        return qs

@@ -3,7 +3,8 @@ from rest_framework import urls
 #from . import views
 from rest_auth.registration.views import RegisterView
 from .serializers import CustomRegisterSerializer
-from .views import AccountActivateView
+
+# urls reat-auth/registraion 회원가입 rest-auth/login 로그인 rest-auth/logout
 
 urlpatterns =[
     path('api-auth/', include('rest_framework.urls')),
@@ -13,5 +14,6 @@ urlpatterns =[
     #path('rest-auth/registration/', include('rest_auth.registration.urls')),
     path('', include('allauth.urls')),
     path('rest-auth/registration/', RegisterView.as_view(serializer_class=CustomRegisterSerializer), name='rest_register'),
-    path('activate/<str:uidb64>/<str:token>/', AccountActivateView.as_view(), name='account-activate'),
+   
+    
  ]
