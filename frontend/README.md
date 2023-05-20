@@ -3,6 +3,7 @@
 
 ### To Do List
 - axios로 backend에 요청
+- MakePost.js, GetPost.js 구현
 
 ### Error, Bug
 
