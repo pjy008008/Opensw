@@ -165,20 +165,26 @@ ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = '/?verification=1'
 ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = '/?verification=1'
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' ##콘솔로만 확인
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  ##실제 확인
+
+
 EMAIL_HOST = 'smtp.gmail.com'
 # 메일을 호스트하는 서버
 EMAIL_PORT = '587'
 # gmail과의 통신하는 포트
 EMAIL_HOST_USER = 'bokhak2023@gmail.com'
 # 발신할 이메일
-EMAIL_HOST_PASSWORD = '융 안보여줘'
+EMAIL_HOST_PASSWORD = 'test' #*****여기 나중에 실제 앱 비밀번호 넣어야함
 # 발신할 메일의 비밀번호
 EMAIL_USE_TLS = True
 # TLS 보안 방법
+EMAIL_USE_SSL = False
+# SSL 사용 여부
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 # 사이트와 관련한 자동응답을 받을 이메일 주소,'webmaster@localhost'
-
+DEFAULT_FROM_EMAIL = 'bokhak2023@gmail.com'  # 기본 발신 이메일 주소
+EMAIL_SUBJECT_PREFIX = '[account]'
 
 
 

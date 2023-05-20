@@ -27,8 +27,8 @@ class CustomRegisterSerializer(RegisterSerializer):
     def validate_email(self, email):
         # 특정 메일 주소를 허용하고 나머지는 거부하는 로직을 구현합니다.
             # 허용할 이메일 도메인
-        allowed_domains = ['chungbuk.ac.kr', 'cbnu.ac.kr']
-        
+        allowed_domains = ['chungbuk.ac.kr', 'cbnu.ac.kr','naver.com','google.com']
+        ##테스트를 위해서 naver google 추가 나중에 빼야함
         # 이메일 주소에서 도메인 부분 추출
         domain = email.split('@')[1]
         
