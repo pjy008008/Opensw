@@ -8,12 +8,9 @@ from .serializers import CustomRegisterSerializer
 
 urlpatterns =[
     path('api-auth/', include('rest_framework.urls')),
-    
-    #path('signup/', views.UserCreate.as_view()),
     path('rest-auth/',include('rest_auth.urls')),
     #path('rest-auth/registration/', include('rest_auth.registration.urls')),
     path('', include('allauth.urls')),
     path('rest-auth/registration/', RegisterView.as_view(serializer_class=CustomRegisterSerializer), name='rest_register'),
    
-    
  ]

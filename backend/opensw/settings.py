@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-from django.core.mail import get_connection, send_mail ##이메일 로그 확인용
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -165,8 +164,8 @@ ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = '/?verification=1'
 ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = '/?verification=1'
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' ##콘솔로만 확인
-#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  ##실제 확인
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' ##콘솔로만 확인
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  ##실제 확인
 
 
 EMAIL_HOST = 'smtp.gmail.com'
@@ -175,7 +174,7 @@ EMAIL_PORT = '587'
 # gmail과의 통신하는 포트
 EMAIL_HOST_USER = 'bokhak2023@gmail.com'
 # 발신할 이메일
-EMAIL_HOST_PASSWORD = 'test' #*****여기 나중에 실제 앱 비밀번호 넣어야함
+EMAIL_HOST_PASSWORD = 'czyfnntuaslyeznx' #*****여기 나중에 실제 앱 비밀번호 넣어야함
 # 발신할 메일의 비밀번호
 EMAIL_USE_TLS = True
 # TLS 보안 방법
