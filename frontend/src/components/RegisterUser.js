@@ -1,8 +1,6 @@
 import { useState } from "react";
-import Axios from "axios";
-
+import axios from 'axios'
 const RegisterUser = () => {
-  const axios = require('axios');
   const [email, setEmail] = useState("");
   const [ps1, setPs1] = useState("");
   const [ps2, setPs2] = useState("");
@@ -34,16 +32,20 @@ const RegisterUser = () => {
   const onSubmit = (event) => {
     event.preventDefault();
     axios
-      .post("http://127.0.0.1:8000/user/rest-auth/registration", {
-        Email: email,
-        Password1: ps1,
-        Password2: ps2,
-        Age: age,
-        Gender: gender,
-        Phone: phone,
-        Major: major,
-        Realname: real,
-      })
+      .post("http://127.0.0.1:8000/user/rest-auth/registration/", {
+        email: email,
+        password1: ps1,
+        password2: ps2,
+        age: age,
+        gender: gender,
+        phone: phone,
+        major: major,
+        realname: real,
+        
+      },{
+        headers: {
+          'Content-Type': 'application/json' // 요청 헤더에 JSON 형식으로 설정
+        }})
       .then(function (response) {
         console.log(response);
       })
