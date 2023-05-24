@@ -1,6 +1,8 @@
 import { useState } from "react";
+import Axios from "axios";
 
 const RegisterUser = () => {
+  const axios = require('axios');
   const [email, setEmail] = useState("");
   const [ps1, setPs1] = useState("");
   const [ps2, setPs2] = useState("");
@@ -14,80 +16,110 @@ const RegisterUser = () => {
     if (name === "Email") {
       setEmail((prev) => value);
     } else if (name === "Password1") {
-      setContext((prev) => value);
+      setPs1((prev) => value);
     } else if (name === "Password2") {
-      setPeople((prev) => value);
+      setPs2((prev) => value);
+    } else if (name === "Age") {
+      setAge((prev) => value);
+    } else if (name === "Gender") {
+      setGender((prev) => value);
+    } else if (name === "Phone") {
+      setPhone((prev) => value);
+    } else if (name === "Major") {
+      setMajor((prev) => value);
+    } else if (name === "Realname") {
+      setReal((prev) => value);
     }
   };
-  // axios.post('/user', {
-  //     firstName: 'Fred',
-  //     lastName: 'Flintstone'
-  //   })
-  //   .then(function (response) {
-  //     console.log(response);
-  //   })
-  //   .catch(function (error) {
-  //     console.log(error);
-  //   });
+  const onSubmit = (event) => {
+    event.preventDefault();
+    axios
+      .post("http://127.0.0.1:8000/user/rest-auth/registration", {
+        Email: email,
+        Password1: ps1,
+        Password2: ps2,
+        Age: age,
+        Gender: gender,
+        Phone: phone,
+        Major: major,
+        Realname: real,
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   return (
     <div>
-      <form>
+      <form onSubmit={onSubmit}>
         <input
           name="Email"
-          onChange={onchange}
+          onChange={onChange}
           placeholder="충북대 웹메일"
           value={email}
           required
         />
+        <br />
         <input
           name="Password1"
-          onChange={onchange}
+          onChange={onChange}
           placeholder="비밀번호"
           value={ps1}
           required
         />
+        <br />
         <input
           name="Password2"
-          onChange={onchange}
+          onChange={onChange}
           placeholder="비밀번호 재입력"
           value={ps2}
           required
         />
+        <br />
         <input
           name="Age"
-          onChange={onchange}
+          onChange={onChange}
           placeholder="나이"
           value={age}
           required
         />
+        <br />
         <input
           name="Gender"
-          onChange={onchange}
+          onChange={onChange}
           placeholder="성별"
           value={gender}
           required
         />
+        <br />
         <input
           name="Phone"
-          onChange={onchange}
+          onChange={onChange}
           placeholder="전화번호"
           value={phone}
           required
         />
+        <br />
         <input
           name="Major"
-          onChange={onchange}
+          onChange={onChange}
           placeholder="전공"
           value={major}
           required
         />
+        <br />
         <input
           name="Realname"
-          onChange={onchange}
+          onChange={onChange}
           placeholder="이름"
           value={real}
           required
         />
+        <br />
+        <input type="submit" value="submit" />
       </form>
     </div>
   );
