@@ -1,0 +1,17 @@
+body{
+    margin-top: 25%;
+    text-align: center;
+}
+h1{
+    font-size: 50px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: bold;
+    color: white;
+}
+.toggle{
+    background-color: white;
+    border: white;
+    border-radius: 20px;
+    width: 200px;
+    height: 30px;
+}

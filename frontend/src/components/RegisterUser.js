@@ -56,6 +56,7 @@ const RegisterUser = () => {
 
   return (
     <div>
+      <h2>Regist</h2>
       <form onSubmit={onSubmit}>
         <input
           name="Email"
