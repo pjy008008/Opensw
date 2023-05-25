@@ -10,8 +10,11 @@ const Auth = () => {
   return (
     <div>
       <h1 className="title">과팅</h1>
+      <div className={styles.context}>
       {first ? <RegisterUser /> : <LoginUser />}
       <button className={styles.toggle} onClick={onClick}>{first ? "로그인" : "회원가입"}</button>
+      </div>
+      
     </div>
   );
 };

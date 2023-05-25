@@ -15,14 +15,16 @@ input{
     height:35px;
     margin-bottom: 10px;
     border-radius: 20px;
-    border-color: white;
+    padding-left: 18px;
     border: white;
-    
 }
 input::placeholder{
-    padding-left: 20px;
     color: black;
 }
+input:focus{
+    outline: 2px solid #0057B8;
+}
 body{
-    background-color:#00A9E0;
+    background-color:#ABCAE9;
+    /* #ABCAE9, #00A9E0, #0057B8 */
 }

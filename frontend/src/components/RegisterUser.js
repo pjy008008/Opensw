@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from 'axios'
+import styles from "./RegisterUser.module.css"
 const RegisterUser = () => {
   const [email, setEmail] = useState("");
   const [ps1, setPs1] = useState("");
@@ -56,7 +57,7 @@ const RegisterUser = () => {
 
   return (
     <div>
-      <h2>Regist</h2>
+      <h2 className={styles.title}>회원가입</h2>
       <form onSubmit={onSubmit}>
         <input
           name="Email"
@@ -122,7 +123,7 @@ const RegisterUser = () => {
           required
         />
         <br />
-        <input type="submit" value="submit" />
+        <input className={styles.submit} type="submit" value="submit" />
       </form>
     </div>
   );
