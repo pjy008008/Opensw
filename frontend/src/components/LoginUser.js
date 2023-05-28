@@ -1,27 +1,35 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
-import styles from "./LoginUser.module.css"
+import styles from "./LoginUser.module.css";
+import { redirect } from "react-router-dom";
 
 const LoginUser = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const onSubmit = (event)=>{
+  const onSubmit = (event) => {
     event.preventDefault();
     axios
-    .post("http://localhost:8000/user/rest-auth/login/", {
-      email: email,
-      password: password,
-    },{
-      headers: {
-        'Content-Type': 'application/json' // 요청 헤더에 JSON 형식으로 설정
-      }})
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-  }
+      .post(
+        "http://localhost:8000/user/rest-auth/login/",
+        {
+          email: email,
+          password: password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json", // 요청 헤더에 JSON 형식으로 설정
+          },
+        }
+      )
+      .then(function (response) {
+        console.log(response);
+        localStorage.setItem("isLoggedIn", true);
+        window.location.reload();
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
   const onChange = (event) => {
     const { name, value } = event.target;
     if (name === "Email") {
@@ -43,6 +51,7 @@ const LoginUser = () => {
         />
         <br />
         <input
+          type="password"
           placeholder="비밀번호"
           name="password"
           value={password}
@@ -50,7 +59,7 @@ const LoginUser = () => {
           required
         />
         <br />
-        <input className={styles.submit} type="submit" value="submit" />
+        <input className={styles.submit} type="submit" value="로그인" />
       </form>
     </div>
   );
