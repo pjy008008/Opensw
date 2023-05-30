@@ -134,11 +134,11 @@ REST_AUTH_REGISTER_SERIALIZERS = {
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Seoul' #한국시간 반영
 
 USE_I18N = True
 
-USE_TZ = True
+USE_TZ = False #DB에 변경된 시간 반영
 
 
 # Static files (CSS, JavaScript, Images)
