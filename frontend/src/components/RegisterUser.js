@@ -53,8 +53,8 @@ const RegisterUser = () => {
       )
       .then(function (response) {
         console.log(response);
-        localStorage.setItem("isLoggedIn", true);
-        window.location.reload();
+        // localStorage.setItem("isLoggedIn", true);
+        // window.location.reload();
       })
       .catch(function (error) {
         console.log(error);

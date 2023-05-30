@@ -6,7 +6,7 @@ import { redirect } from "react-router-dom";
 const LoginUser = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
     axios
       .post(
@@ -22,8 +22,12 @@ const LoginUser = () => {
         }
       )
       .then(function (response) {
+        // console.log(response);
+        // localStorage.setItem("isLoggedIn", true);
+        // window.location.reload();
         console.log(response);
-        localStorage.setItem("isLoggedIn", true);
+        const token = response.data.key;
+        localStorage.setItem("token", token);
         window.location.reload();
       })
       .catch(function (error) {
