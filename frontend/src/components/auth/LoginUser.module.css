@@ -7,10 +7,15 @@
     border: white;
     border-radius: 20px;
     width: 200px;
-    height: 30px;
+    height: 33px;
     margin-top: 20px;
     padding: 0px;
 }
+.submit:hover {
+    background-color: #0057b8;
+    transition: 0.5s;
+    transition-timing-function: ease-in-out;
+  }
 input{
     width: 340px;
     height:40px;
