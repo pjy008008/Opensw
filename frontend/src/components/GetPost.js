@@ -1,22 +1,23 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 const GetPost = () => {
-  const [title, setTitle] = useState([]);
+  const [post, setPost] = useState([]);
+  // const res = await fetch("http://127.0.0.1:8000/api/grade");
+  //       const data = await res.json();
+  //       setPosts(data);
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    console.log(token)
+    axios.get("http://127.0.0.1:8000/api/", {
+      headers: { Authorization: `Token ${token}` },
+    }).then(function(response){
+      console.log(response)
+    }).catch(function(error){
+      console.log(error);
+    })
+  }, []);
 
-  useEffect(()=>{
-    axios.get('http://127.0.0.1:8000/api/')
-  .then(function (response) {
-    // 성공 핸들링
-    console.log(response);
-  })
-  .catch(function (error) {
-    // 에러 핸들링
-    console.log(error);
-  })
-  .finally(function () {
-    // 항상 실행되는 영역
-  });
-  },[])
   return <div></div>;
 };
+
 export default GetPost;
