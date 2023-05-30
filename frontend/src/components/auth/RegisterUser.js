@@ -10,6 +10,8 @@ const RegisterUser = () => {
   const [phone, setPhone] = useState("");
   const [major, setMajor] = useState("");
   const [real, setReal] = useState("");
+  const [error, setError] = useState("");
+  const [isSuccess,setIsSuccess]=useState(true);
   const onChange = (event) => {
     const { name, value } = event.target;
     if (name === "Email") {
@@ -53,11 +55,15 @@ const RegisterUser = () => {
       )
       .then(function (response) {
         console.log(response);
-        localStorage.setItem("isLoggedIn", true);
-        window.location.reload();
+        // localStorage.setItem("isLoggedIn", true);
+        // window.location.reload();
+        setIsSuccess(true);
+        setError((prev)=>"이메일이 전송되었습니다.");
       })
       .catch(function (error) {
         console.log(error);
+        setIsSuccess(false);
+        setError((prev)=>"회원가입에 실패했습니다.")
       });
   };
 
@@ -131,7 +137,7 @@ const RegisterUser = () => {
         <div className={styles.radio}>
           <input
             onChange={onChange}
-            checked={gender==="M"}
+            checked={gender === "M"}
             className={styles.radio}
             type="radio"
             id="genderChoice1"
@@ -142,7 +148,7 @@ const RegisterUser = () => {
           <input
             onChange={onChange}
             className={styles.radio}
-            checked={gender==="F"}
+            checked={gender === "F"}
             type="radio"
             id="genderChoice2"
             name="Gender"
@@ -150,6 +156,7 @@ const RegisterUser = () => {
           />
           <label htmlFor="genderChoice2">여성</label>
         </div>
+        <p className={isSuccess?styles.success:styles.error}>{error}</p>
         <input className={styles.submit} type="submit" value="회원가입" />
       </form>
     </div>

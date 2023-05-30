@@ -7,16 +7,11 @@ import Auth from "../routes/Auth";
 import { useState, useEffect } from "react";
 
 const AppRouter = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const fetchLoginStatus = async () => {
-      const savedLogin = await localStorage.getItem("isLoggedIn");
-      if (savedLogin === "true") {
-        setIsLoggedIn(true);
-      }
+      const savedLogin = await localStorage.getItem("token");
       setIsLoading(false);
-      console.log(isLoading)
     };
 
     fetchLoginStatus();
@@ -30,10 +25,10 @@ const AppRouter = () => {
             <div>
               <h1>loading</h1>
             </div>
-          ) : isLoggedIn ? (
+          ) : localStorage.getItem("token") ? (
             <Home />
           ) : (
-            <Auth setIsLoggedIn={setIsLoggedIn} />
+            <Auth />
           )}
         </div>
       ),
