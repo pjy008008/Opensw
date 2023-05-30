@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./LoginUser.module.css";
-import { redirect } from "react-router-dom";
 
 const LoginUser = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const onSubmit = async (event) => {
     event.preventDefault();
     axios
@@ -32,6 +32,8 @@ const LoginUser = () => {
       })
       .catch(function (error) {
         console.log(error);
+        console.log(error.response.data.non_field_errors[0]);
+        setError((prev) => "로그인에 실패했습니다.");
       });
   };
   const onChange = (event) => {
@@ -62,6 +64,7 @@ const LoginUser = () => {
           onChange={onChange}
           required
         />
+        <p>{error}</p>
         <br />
         <input className={styles.submit} type="submit" value="로그인" />
       </form>

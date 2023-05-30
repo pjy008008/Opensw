@@ -29,3 +29,7 @@ body{
     background-color:#ABCAE9;
     /* #ABCAE9, #00A9E0, #0057B8 */
 }
+p{
+    color: red;
+    font-size: 5px;
+}

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import RegisterUser from "../components/RegisterUser";
-import LoginUser from "../components/LoginUser";
+import RegisterUser from "../components/auth/RegisterUser.js";
+import LoginUser from "../components/auth/LoginUser.js";
 import styles from "./Auth.module.css";
 const Auth = ({ isLoggedIn,setIsLoggedIn }) => {
   const [first, setFirst] = useState(false);
