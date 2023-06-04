@@ -2,13 +2,15 @@
   z-index: +1;
 }
 span {
-    top: 15px;
+  font-size: 13px;
+  font-weight: bold;
+  top: 15px;
   position: absolute;
   display: flex;
   z-index: +1;
   background: white;
   width: 57px;
-  height: 27px;
+  height: 23px;
   border-radius: 5px;
   /* #0057b8 */
   /* #ABCAE9 */
@@ -16,8 +18,8 @@ span {
   color: black;
   cursor: pointer;
   display: table-cell;
-  padding-left: 10px;
-  padding-top: 2px;
+  padding-left: 6px;
+  padding-top: 5px;
   text-align: left;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);

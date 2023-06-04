@@ -10,7 +10,7 @@ const Home = () => {
     <div>
       <h1>Home</h1>
       <KakaoMap />
-      <span id="logout" onClick={logout}>logout</span>
+      <span id="logout" onClick={logout}>로그아웃</span>
     </div>
   );
 };

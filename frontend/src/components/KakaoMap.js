@@ -52,7 +52,7 @@ const KakaoMap = () => {
       <Map
         className={styles.map}
         center={{ lat: 36.627883, lng: 127.456268 }}
-        level={4}
+        level={3}
       >
         {post &&
           post.map((value) => (
