@@ -7,11 +7,9 @@ import axios from "axios";
 const KakaoMap = () => {
   const [post, setPost] = useState([]);
 
-  // const res = await fetch("http://127.0.0.1:8000/api/grade");
-  //       const data = await res.json();
-  //       setPosts(data);
   useEffect(() => {
     const token = localStorage.getItem("token");
+    //post model 불러오기
     axios
       .get("http://127.0.0.1:8000/api/", {
         headers: { Authorization: `Token ${token}` },
@@ -30,6 +28,8 @@ const KakaoMap = () => {
         console.log(error);
       });
   }, []);
+
+  //Map Marker 표시하기
   const EventMarkerContainer = ({ position, content }) => {
     const map = useMap();
     const [isVisible, setIsVisible] = useState(false);
@@ -46,7 +46,8 @@ const KakaoMap = () => {
       </MapMarker>
     );
   };
-  console.log(post);
+  // console.log(post);
+  
   return (
     <>
       <Map
