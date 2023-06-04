@@ -187,6 +187,7 @@ EMAIL_USE_SSL = False
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 # 사이트와 관련한 자동응답을 받을 이메일 주소,'webmaster@localhost'
 DEFAULT_FROM_EMAIL = 'bokhak2023@gmail.com'  # 기본 발신 이메일 주소
+
 EMAIL_SUBJECT_PREFIX = '[account]'
 
 
