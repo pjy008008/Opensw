@@ -7,9 +7,9 @@
   background-color: white;
   border: white;
   border-radius: 20px;
-  width: 200px;
-  height: 33px;
-  margin-top: 20px;
+  width: 340px;
+  height: 35px;
+  margin-top: 10px;
   padding: 0px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -17,6 +17,7 @@
 .submit:hover {
   background-color: #0057b8;
   transition: 0.5s;
+  font-weight: bold;
   color: white;
   transition-timing-function: ease-in-out;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
@@ -42,4 +43,10 @@ body {
 p {
   color: red;
   font-size: 5px;
+}
+hr{
+    width: 340px;
+    color: white;
+    border: 1px solid white;
+    margin-bottom: 10px;
 }
