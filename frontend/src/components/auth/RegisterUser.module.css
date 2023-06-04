@@ -10,7 +10,7 @@
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 .submit:hover {
-  background-color: #0057b8;
+  background-color: #02343f;
   transition: 0.5s;
   font-weight: bold;
   color: white;

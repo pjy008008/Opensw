@@ -15,7 +15,7 @@
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 .submit:hover {
-  background-color: #0057b8;
+  background-color: #02343f;
   transition: 0.5s;
   font-weight: bold;
   color: white;
@@ -34,19 +34,20 @@ input::placeholder {
   color: black;
 }
 input:focus {
-  outline: 2px solid #0057b8;
+  outline: 2px solid #02343f;
 }
 body {
-  background-color: #abcae9;
+  background-color: #f0edcc;
+  /* f0edcc */
   /* #ABCAE9, #00A9E0, #0057B8 */
 }
 p {
   color: red;
   font-size: 5px;
 }
-hr{
-    width: 340px;
-    color: white;
-    border: 1px solid white;
-    margin-bottom: 10px;
+hr {
+  width: 340px;
+  color: white;
+  border: 1px solid white;
+  margin-bottom: 10px;
 }
