@@ -1,11 +1,12 @@
 import React from "react";
-import { MapMarker, Map, useMap } from "react-kakao-maps-sdk";
-import { useState,useEffect } from "react";
+import { MapMarker, Map, useMap, MapTypeControl } from "react-kakao-maps-sdk";
+import { useState, useEffect } from "react";
 import styles from "./KakaoMap.module.css";
 import axios from "axios";
 
 const KakaoMap = () => {
   const [post, setPost] = useState([]);
+
   // const res = await fetch("http://127.0.0.1:8000/api/grade");
   //       const data = await res.json();
   //       setPosts(data);
@@ -47,20 +48,23 @@ const KakaoMap = () => {
   };
   console.log(post);
   return (
-    <Map
-      className={styles.map}
-      center={{ lat: 36.627883, lng: 127.456268 }}
-      level={4}
-    >
-      {post &&
-        post.map((value) => (
-          <EventMarkerContainer
-            key={`EventMarkerContainer-${value.latlng.lat}-${value.latlng.lng}`}
-            position={value.latlng}
-            content={value.title}
-          />
-        ))}
-    </Map>
+    <>
+      <Map
+        className={styles.map}
+        center={{ lat: 36.627883, lng: 127.456268 }}
+        level={4}
+      >
+        {post &&
+          post.map((value) => (
+            <EventMarkerContainer
+              key={`EventMarkerContainer-${value.latlng.lat}-${value.latlng.lng}`}
+              position={value.latlng}
+              content={value.title}
+            />
+          ))}
+        <MapTypeControl position={kakao.maps.ControlPosition.TOPRIGHT} />
+      </Map>
+    </>
   );
 };
 
