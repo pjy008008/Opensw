@@ -21,7 +21,11 @@ class Post(models.Model):
     personnel = models.IntegerField(choices=NUMBER_CHOICES, default=1) # 인원수
     created_at = models.DateTimeField('created_time', auto_now_add=True, null=True) # 작성 시간
     updated_at = models.DateTimeField('updated_time', auto_now=True, null=True) # 수정 시간
-
+    gender = models.CharField(max_length=1,null=True,blank=True)
+    major = models.CharField(max_length=100,null=True,blank=True)
+    phone = models.CharField(max_length=30,null=True,blank=True)
+    age = models.IntegerField(default=20,null=True,blank=True)
+    realname = models.CharField(max_length=100,null=True,blank=True)
     
     def __str__(self):
         return self.title
