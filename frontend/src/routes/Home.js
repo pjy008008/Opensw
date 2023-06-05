@@ -32,6 +32,14 @@ const Home = () => {
         </span>
       )}
       {/* <MakePost /> */}
+      <footer>
+        <a href="https://www.flaticon.com/kr/free-icons/" title="소녀 아이콘">
+          소녀 아이콘 제작자: Freepik - Flaticon
+        </a>
+        <a href="https://www.flaticon.com/kr/free-icons/" title="남성 아이콘">
+          남성 아이콘 제작자: Freepik - Flaticon
+        </a>
+      </footer>
     </div>
   );
 };

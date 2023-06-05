@@ -9,6 +9,8 @@ import {
 import { useState, useEffect } from "react";
 import styles from "./KakaoMap.module.css";
 import axios from "axios";
+import maleImg from "../image/man.png";
+import femaleImg from "../image/woman.png";
 
 const KakaoMap = () => {
   const [post, setPost] = useState([]);
@@ -46,6 +48,7 @@ const KakaoMap = () => {
   //Map Marker 표시하기
   const EventMarkerContainer = ({ position, content }) => {
     const map = useMap();
+    const [isWoman, setIsWoman] = useState(content.gender === "F");
     const [isVisible, setIsVisible] = useState(false);
     const handleMarkerClick = (marker) => {
       if (isVisible && selectedMarker === position) {
@@ -57,18 +60,50 @@ const KakaoMap = () => {
         setSelectedMarker(position);
       }
     };
+
     useEffect(() => {
       setIsVisible(selectedMarker === position);
     }, [selectedMarker, position]);
     return (
       <div>
-        <MapMarker
-          position={position} // 마커를 표시할 위치
-          // @ts-ignore
-          onClick={(marker) => handleMarkerClick(marker)}
-          // onMouseOver={() => setIsVisible(true)}
-          // onMouseOut={() => setIsVisible(false)}
-        ></MapMarker>
+        {isWoman ? (
+          <MapMarker
+            position={position} // 마커를 표시할 위치
+            onClick={(marker) => handleMarkerClick(marker)}
+            image={{
+              src: femaleImg,
+              size: {
+                width: 32,
+                height: 34,
+              },
+              options: {
+                offset: {
+                  x: 16,
+                  y: 34,
+                },
+              },
+            }}
+          ></MapMarker>
+        ) : (
+          <MapMarker
+            position={position} // 마커를 표시할 위치
+            onClick={(marker) => handleMarkerClick(marker)}
+            image={{
+              src: maleImg,
+              size: {
+                width: 32,
+                height: 34,
+              },
+              options: {
+                offset: {
+                  x: 16,
+                  y: 34,
+                },
+              },
+            }}
+          ></MapMarker>
+        )}
+
         {isVisible && (
           <CustomOverlayMap position={position}>
             <div className={styles.infowindow}>
