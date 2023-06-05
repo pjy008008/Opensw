@@ -13,6 +13,12 @@ class PostSerializer(serializers.ModelSerializer):
             'lng',
             'personnel',
             'created_at',
-            'updated_at'
+            'updated_at',
+            'user',
+            'gender',
+            'major',
+            'phone',
+            'age',
         )
         model = Post
+        
