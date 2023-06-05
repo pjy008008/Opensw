@@ -1,11 +1,18 @@
 import React from "react";
-import { MapMarker, Map, useMap, MapTypeControl } from "react-kakao-maps-sdk";
+import {
+  MapMarker,
+  Map,
+  useMap,
+  MapTypeControl,
+  CustomOverlayMap,
+} from "react-kakao-maps-sdk";
 import { useState, useEffect } from "react";
 import styles from "./KakaoMap.module.css";
 import axios from "axios";
 
 const KakaoMap = () => {
   const [post, setPost] = useState([]);
+  const [selectedMarker, setSelectedMarker] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -15,16 +22,17 @@ const KakaoMap = () => {
         headers: { Authorization: `Token ${token}` },
       })
       .then(function (response) {
+        console.log(response);
         const data = response.data;
         const posts = data.map((element) => {
           return {
-            id:element.id,
-            title: <div>{element.title}</div>,
+            id: element.id,
+            title: element.title,
             latlng: { lat: element.lat, lng: element.lng },
+            content: element.content,
           };
         });
         setPost(posts);
-        console.log(posts);
       })
       .catch(function (error) {
         console.log(error);
@@ -35,21 +43,36 @@ const KakaoMap = () => {
   const EventMarkerContainer = ({ position, content }) => {
     const map = useMap();
     const [isVisible, setIsVisible] = useState(false);
-
+    const handleMarkerClick = (marker) => {
+      setIsVisible(true);
+      map.panTo(marker.getPosition());
+      setSelectedMarker(position);
+    };
+    useEffect(() => {
+      setIsVisible(selectedMarker === position);
+    }, [selectedMarker, position]);
     return (
-      <MapMarker
-        position={position} // 마커를 표시할 위치
-        // @ts-ignore
-        onClick={(marker) => map.panTo(marker.getPosition())}
-        onMouseOver={() => setIsVisible(true)}
-        onMouseOut={() => setIsVisible(false)}
-      >
-        {isVisible && content}
-      </MapMarker>
+      <div>
+        <MapMarker
+          position={position} // 마커를 표시할 위치
+          // @ts-ignore
+          onClick={(marker) => handleMarkerClick(marker)}
+          // onMouseOver={() => setIsVisible(true)}
+          // onMouseOut={() => setIsVisible(false)}
+        ></MapMarker>
+        {isVisible && (
+          <CustomOverlayMap position={position}>
+            <div className={styles.infowindow}>
+              <h3 className={styles.title}>{content.title}</h3>
+              <p className={styles.contents}>{content.content}</p>
+            </div>
+          </CustomOverlayMap>
+        )}
+      </div>
     );
   };
   // console.log(post);
-  
+
   return (
     <>
       <Map
@@ -62,7 +85,7 @@ const KakaoMap = () => {
             <EventMarkerContainer
               key={`EventMarkerContainer-${value.latlng.lat}-${value.latlng.lng}`}
               position={value.latlng}
-              content={value.title}
+              content={value}
             />
           ))}
         <MapTypeControl position={kakao.maps.ControlPosition.TOPRIGHT} />
