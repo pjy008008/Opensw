@@ -30,6 +30,10 @@ const KakaoMap = () => {
             title: element.title,
             latlng: { lat: element.lat, lng: element.lng },
             content: element.content,
+            gender: element.gender,
+            person: element.personnel,
+            major: element.major,
+            date: new Date(element.created_at).toLocaleString(),
           };
         });
         setPost(posts);
@@ -44,9 +48,14 @@ const KakaoMap = () => {
     const map = useMap();
     const [isVisible, setIsVisible] = useState(false);
     const handleMarkerClick = (marker) => {
-      setIsVisible(true);
-      map.panTo(marker.getPosition());
-      setSelectedMarker(position);
+      if (isVisible && selectedMarker === position) {
+        setIsVisible(false); // 이미 열려 있는 infowindow를 닫기 위해 isVisible 값을 false로 설정
+        setSelectedMarker(null); // 선택된 마커를 해제
+      } else {
+        setIsVisible(true);
+        map.panTo(marker.getPosition());
+        setSelectedMarker(position);
+      }
     };
     useEffect(() => {
       setIsVisible(selectedMarker === position);
@@ -63,8 +72,17 @@ const KakaoMap = () => {
         {isVisible && (
           <CustomOverlayMap position={position}>
             <div className={styles.infowindow}>
-              <h3 className={styles.title}>{content.title}</h3>
-              <p className={styles.contents}>{content.content}</p>
+              <div className={styles.head}>
+                <p className={styles.date}>{content.date}</p>
+                <h3 className={styles.title}>{content.title}</h3>
+                <hr className={styles.line} />
+              </div>
+              <div className={styles.body}>
+                <p className={styles.contents}>{content.content}</p>
+                {/* <p className={styles.gender}>{content.gender}</p> */}
+                <p className={styles.person}>인원 : {content.person}명</p>
+                <p className={styles.major}>전공 : {content.major}</p>
+              </div>
             </div>
           </CustomOverlayMap>
         )}
@@ -88,7 +106,7 @@ const KakaoMap = () => {
               content={value}
             />
           ))}
-        <MapTypeControl position={kakao.maps.ControlPosition.TOPRIGHT} />
+        <MapTypeControl position={window.kakao.maps.ControlPosition.TOPRIGHT} />
       </Map>
     </>
   );
