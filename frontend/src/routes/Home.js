@@ -22,13 +22,13 @@ const Home = () => {
       {form ? (
         <>
           <span className={styles.submitBtn} onClick={toggle}>
-            인연찾기
+            포스팅닫기
           </span>
           <MakePost />
         </>
       ) : (
         <span className={styles.submitBtn} onClick={toggle}>
-          인연찾기
+          포스팅열기
         </span>
       )}
       {/* <MakePost /> */}

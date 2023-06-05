@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import styles from "./MakePost.module.css"
+import styles from "./MakePost.module.css";
 import axios from "axios";
 const MakePost = () => {
   const [title, setTitle] = useState("");
@@ -55,6 +55,7 @@ const MakePost = () => {
       )
       .then(function (response) {
         console.log(response);
+        window.location.reload();
       })
       .catch(function (error) {
         console.log(error);
