@@ -18,11 +18,13 @@ const KakaoMap = () => {
         const data = response.data;
         const posts = data.map((element) => {
           return {
+            id:element.id,
             title: <div>{element.title}</div>,
             latlng: { lat: element.lat, lng: element.lng },
           };
         });
         setPost(posts);
+        console.log(posts);
       })
       .catch(function (error) {
         console.log(error);
