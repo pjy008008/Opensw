@@ -28,6 +28,8 @@ span.logout {
   left: 140px;
 }
 span.submitBtn {
+  padding-left: 23px;
+  padding-right: 7px;
   top: 20px;
 }
 span:hover {
