@@ -15,6 +15,7 @@ class ListPost(generics.ListCreateAPIView): # 작성
                         age=user.age,
                         gender=user.gender,
                         major=user.major,
+                        realname=user.realname,
                         )
 
 class DetailPost(generics.RetrieveUpdateDestroyAPIView): # 세부정보, 수정, 삭제
