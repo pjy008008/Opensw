@@ -108,9 +108,6 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
-        "TEST": {
-            "NAME": BASE_DIR / "db.sqlite3",
-        },
     }
 }
 
@@ -199,13 +196,31 @@ DEFAULT_FROM_EMAIL = 'bokhak2023@gmail.com'  # 기본 발신 이메일 주소
 EMAIL_SUBJECT_PREFIX = '[account]'
 
 CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels_redis.core.RedisChannelLayer",
-        "CONFIG": {
-            "hosts": [("127.0.0.1", 6379)],
-        },
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
     },
 }
 
 
-
+"""
+데이터 베이스 로그 확인용
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'DEBUG',
+    },
+    'loggers': {
+        'django.db.backends': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+    },
+}"""

@@ -87,9 +87,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
         return chat_room
     
-    
-    from asgiref.sync import async_to_sync
-
     @sync_to_async
     def delete_chat_room(self):
         # 채팅방 삭제 로직
