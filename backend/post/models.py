@@ -26,6 +26,10 @@ class Post(models.Model):
     phone = models.CharField(max_length=30,null=True,blank=True)
     age = models.IntegerField(default=20,null=True,blank=True)
     realname = models.CharField(max_length=100,null=True,blank=True)
+    reciveuser=models.ForeignKey(appuser, on_delete=models.CASCADE, null=True, related_name='posts_received',blank=True)
+    roomid = models.IntegerField(default=0, null=True,blank=True)
+    match = models.IntegerField(default=0,null=True,blank=True)
+    recivename = models.CharField(default='', max_length=100, null=False, blank=False)
     
     def __str__(self):
         return self.title
