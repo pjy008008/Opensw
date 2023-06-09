@@ -202,9 +202,8 @@ CHANNEL_LAYERS = {
 }
 
 
-"""
-데이터 베이스 로그 확인용
-LOGGING = {
+
+"""LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'handlers': {
