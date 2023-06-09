@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import Home from "../routes/Home";
 import Auth from "../routes/Auth";
+import Chat from "../routes/Chat";
 
 import { useState, useEffect } from "react";
 
@@ -30,6 +31,14 @@ const AppRouter = () => {
           ) : (
             <Auth />
           )}
+        </div>
+      ),
+    },
+    {
+      path: `/chat/:id`,
+      element: (
+        <div>
+          <Chat />
         </div>
       ),
     },
