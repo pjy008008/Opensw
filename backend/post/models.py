@@ -30,6 +30,10 @@ class Post(models.Model):
     roomid = models.IntegerField(default=0, null=True,blank=True)
     match = models.IntegerField(default=0,null=True,blank=True)
     recivename = models.CharField(default='', max_length=100, null=False, blank=False)
-    
-    def __str__(self):
-        return self.title
+    email = models.EmailField(default="")
+
+    def str(self):
+        if self.title is not None:
+            return self.title
+        else:
+            return "Untitled"

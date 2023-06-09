@@ -1,5 +1,4 @@
 body {
-  margin-top: 30vh;
   text-align: center;
 }
 h1 {
@@ -9,6 +8,9 @@ h1 {
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-weight: bold;
   color: #02343f;
+}
+.title{
+  margin-top: 30vh;
 }
 .toggle {
   background-color: white;

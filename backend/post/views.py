@@ -32,6 +32,7 @@ class ListPost(generics.ListCreateAPIView): # 작성
                         roomid = 0,
                         match = 0,
                         recivename = '',
+                        email=user.email,
                         )
 
 class DetailPost(generics.RetrieveUpdateDestroyAPIView): # 세부정보, 수정, 삭제

@@ -11,6 +11,7 @@ const Home = () => {
   };
   const logout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("email");
     window.location.reload();
   };
   return (

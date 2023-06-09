@@ -27,6 +27,7 @@ class PostSerializer(serializers.ModelSerializer):
             'roomid',
             'match',
             'recivename',
+            'email',
         )
 
         

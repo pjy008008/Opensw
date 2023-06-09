@@ -1,11 +1,23 @@
 import React, { useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
+import styles from "./ChatRoom.module.css";
+import axios from "axios";
 
 const ChatRoom = ({ realname, room_id }) => {
   const chatLogRef = useRef(null);
   const chatSocketRef = useRef(null);
+  const email = localStorage.getItem("email");
+  function removeDomain(email) {
+    const atIndex = email.indexOf("@");
+    if (atIndex !== -1) {
+      return email.substring(0, atIndex);
+    }
+    return email;
+  }
+  const username = removeDomain(email);
   const { id } = useParams();
   const url = `ws://localhost:8000/ws/chat/${id}/`;
+
   useEffect(() => {
     const chatSocket = new WebSocket(url);
     chatSocketRef.current = chatSocket;
@@ -39,7 +51,6 @@ const ChatRoom = ({ realname, room_id }) => {
   const handleSubmit = () => {
     const messageInputDom = document.querySelector("#chat-message-input");
     const message = messageInputDom.value;
-    const username = "realname";
 
     chatSocketRef.current.send(
       JSON.stringify({
@@ -51,37 +62,16 @@ const ChatRoom = ({ realname, room_id }) => {
     messageInputDom.value = "";
   };
 
-  const handleRoomDelete = () => {
-    const confirmation = window.confirm("채팅방을 삭제하시겠습니까?");
-
-    if (confirmation) {
-      chatSocketRef.current.send(
-        JSON.stringify({
-          type: "chat.delete_room",
-        })
-      );
-      window.location.href = "http://localhost:3000/";
-    }
-  };
-
   const handleGoHome = () => {
     window.location.href = "http://localhost:3000/";
   };
 
   return (
-    <div id="container">
-      <h1 id="title">
-        환영합니다, <span>{realname}님</span>
-      </h1>
-      <div>
-        <button id="go-home-button" onClick={handleGoHome}>
-          홈으로
-        </button>
-        <button id="chat-room-delete-button" onClick={handleRoomDelete}>
-          채팅방 삭제하기
-        </button>
-      </div>
+    <div className={styles.container}>
+      <h1 id="title">환영합니다, {username}님</h1>
+      <div></div>
       <textarea
+        className={styles.textfield}
         id="chat-log"
         cols="100"
         rows="20"
@@ -90,18 +80,31 @@ const ChatRoom = ({ realname, room_id }) => {
       ></textarea>
       <br />
       <input
+        className={styles.text}
         id="chat-message-input"
         type="text"
         size="100"
+        placeholder="여기에 입력해주세요"
         onKeyUp={handleKeyUp}
       />
       <br />
-      <input
-        id="chat-message-submit"
-        type="button"
-        value="Send"
-        onClick={handleSubmit}
-      />
+      <div className={styles.btn}>
+        <button
+          className={styles.home}
+          id="go-home-button"
+          onClick={handleGoHome}
+        >
+          홈으로
+        </button>
+        <input
+          className={styles.submit}
+          id="chat-message-submit"
+          type="button"
+          value="보내기"
+          onClick={handleSubmit}
+        />
+      </div>
+
       <script>{/* Remove the script code as it won't work in React */}</script>
     </div>
   );

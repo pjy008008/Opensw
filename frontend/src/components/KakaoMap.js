@@ -11,11 +11,13 @@ import styles from "./KakaoMap.module.css";
 import axios from "axios";
 import maleImg from "../image/man.png";
 import femaleImg from "../image/woman.png";
+import { Link } from "react-router-dom";
+import ChatRoom from "./ChatRoom";
 
 const KakaoMap = () => {
   const [post, setPost] = useState([]);
   const [selectedMarker, setSelectedMarker] = useState(null);
-
+  const email1 = localStorage.getItem("email");
   useEffect(() => {
     const token = localStorage.getItem("token");
     //post model 불러오기
@@ -35,6 +37,10 @@ const KakaoMap = () => {
             gender: element.gender,
             person: element.personnel,
             major: element.major,
+            match: element.match,
+            roomid: element.roomid,
+            realname: element.realname,
+            email: element.email,
             date: new Date(element.created_at).toLocaleString(),
           };
         });
@@ -69,7 +75,6 @@ const KakaoMap = () => {
       const id = event.id;
       const token = localStorage.getItem("token");
       console.log(id);
-
       const url = `http://127.0.0.1:8000/api/${id}/`;
       console.log(url);
       try {
@@ -82,6 +87,7 @@ const KakaoMap = () => {
       } catch (error) {
         console.error(error); // 오류 처리
       }
+      window.location.reload();
     };
     return (
       <div>
@@ -136,7 +142,16 @@ const KakaoMap = () => {
                 {/* <p className={styles.gender}>{content.gender}</p> */}
                 <p className={styles.person}>인원 : {content.person}명</p>
                 <p className={styles.major}>전공 : {content.major}</p>
-                <button onClick={() => putRequest(content)}>put요청</button>
+
+                {content.match === 1 ? (
+                  <button className={styles.match}>
+                    <Link to={`/chat/${content.roomid}`}>채팅</Link>
+                  </button>
+                ) : (
+                  email1 !== content.email && (
+                    <button className={styles.match} onClick={() => putRequest(content)}>매칭</button>
+                  )
+                )}
               </div>
             </div>
           </CustomOverlayMap>
@@ -152,6 +167,8 @@ const KakaoMap = () => {
         className={styles.map}
         center={{ lat: 36.627883, lng: 127.456268 }}
         level={3}
+        maxLevel={4}
+        minLevel={2}
       >
         {post &&
           post.map((value) => (

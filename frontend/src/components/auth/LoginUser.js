@@ -27,7 +27,9 @@ const LoginUser = () => {
         // window.location.reload();
         console.log(response);
         const token = response.data.key;
+
         localStorage.setItem("token", token);
+        localStorage.setItem("email", email);
         window.location.reload();
       })
       .catch(function (error) {
@@ -45,7 +47,7 @@ const LoginUser = () => {
     }
   };
   return (
-    <div>
+    <div className={styles.container}>
       {/* <h2 className={styles.title}>로그인</h2> */}
       <form onSubmit={onSubmit}>
         <input
