@@ -5,7 +5,7 @@ from rest_framework import status
 from django.db.models import Q
 from rest_framework.response import Response
 from chat.models import ChatRoom
-from rest_framework.authentication import SessionAuthentication
+
 
 class ListPost(generics.ListCreateAPIView): # 작성
     queryset = Post.objects.all() # 객체 설정
@@ -37,8 +37,7 @@ class ListPost(generics.ListCreateAPIView): # 작성
 class DetailPost(generics.RetrieveUpdateDestroyAPIView): # 세부정보, 수정, 삭제
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    authentication_classes = [SessionAuthentication]
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated] # 인증된 사용자인지 확인
 
     def update(self, request, *args, **kwargs):
         partial = kwargs.pop('partial', False)
@@ -49,6 +48,7 @@ class DetailPost(generics.RetrieveUpdateDestroyAPIView): # 세부정보, 수정,
                                 status=status.HTTP_403_FORBIDDEN)
         
         elif instance.match == 0:
+            print("match=0")
             if instance.user == request.user:
                 print(request.user)
                 print("수정")
@@ -69,10 +69,15 @@ class DetailPost(generics.RetrieveUpdateDestroyAPIView): # 세부정보, 수정,
                 instance.reciveuser = request.user 
                 chat_room.participants.set([instance.user, instance.reciveuser]) # user1과 user2를 채팅방에 추가
                 chat_room.save()
+                print(instance.reciveuser)
                 print("채팅방 생성")
                 print(chat_room.id)
+
+                print("시리얼라이저")
                 serializer = self.get_serializer(instance, data=request.data, partial=partial)
+                print("시리얼라이저 실행")
                 serializer.is_valid(raise_exception=True)
+                print("오류 는 ")
                 print(serializer.errors)
                 self.perform_update(serializer)
                 serializer.save(instance=instance)

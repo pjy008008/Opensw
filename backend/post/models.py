@@ -13,8 +13,8 @@ class Post(models.Model):
     ]
 
     id = models.AutoField(primary_key=True, null=False, blank=False) # post한 게시글 고유번호
-    title = models.CharField(max_length=100) # 제목
-    content = models.TextField() # 내용
+    title = models.CharField(max_length=100,null=True,blank=True) # 제목
+    content = models.TextField(null=True,blank=True) # 내용
     user = models.ForeignKey(appuser, null=True, blank=True, on_delete=models.CASCADE) # post한 유저의 model
     lat = models.FloatField(default=0) # 위도
     lng = models.FloatField(default=0) # 경도
