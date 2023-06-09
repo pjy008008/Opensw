@@ -29,6 +29,9 @@ class ListPost(generics.ListCreateAPIView): # 작성
                         gender=user.gender,
                         major=user.major,
                         realname=user.realname,
+                        roomid = 0,
+                        match = 0,
+                        recivename = '',
                         )
 
 class DetailPost(generics.RetrieveUpdateDestroyAPIView): # 세부정보, 수정, 삭제
@@ -66,13 +69,15 @@ class DetailPost(generics.RetrieveUpdateDestroyAPIView): # 세부정보, 수정,
                 instance.reciveuser = request.user 
                 chat_room.participants.set([instance.user, instance.reciveuser]) # user1과 user2를 채팅방에 추가
                 chat_room.save()
-                
+                print("채팅방 생성")
+                print(chat_room.id)
                 serializer = self.get_serializer(instance, data=request.data, partial=partial)
                 serializer.is_valid(raise_exception=True)
                 print(serializer.errors)
                 self.perform_update(serializer)
                 serializer.save(instance=instance)
                 
+                instance.recivename = request.user.realname
                 instance.reciveuser = request.user  # reciveuser_id 설정
                 instance.roomid = chat_room.id
                 instance.match=1

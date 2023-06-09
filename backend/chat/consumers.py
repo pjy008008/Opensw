@@ -13,7 +13,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         self.room_id = self.scope["url_route"]["kwargs"]["room_id"]
         self.room_group_name = f"chat_{self.room_id}"
-
+        print("채팅방 접속")
         # Join room group
         await self.channel_layer.group_add(self.room_group_name, self.channel_name)
 
@@ -26,11 +26,13 @@ class ChatConsumer(AsyncWebsocketConsumer):
         
     @database_sync_to_async
     def get_chat_messages(self):
+        print("저장된 메시지 받아오기")
         room = ChatRoom.objects.get(pk=self.room_id)
         messages = room.chatmessage_set.order_by('id')
         return [message.message for message in messages]
 
     async def send_chat_messages(self, messages):
+        print("메시지 입력")
         for message in messages:
             await self.send(text_data=json.dumps({
                 'type': 'chat.message',
@@ -43,10 +45,12 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     @database_sync_to_async
     def save_message(self, message):
+        print("메시지 저장")
         room = ChatRoom.objects.get(pk=self.room_id)
         ChatMessage.objects.create(room=room, message=message)
 
     async def receive(self, text_data):
+        print("메시지 수신")
         text_data_json = json.loads(text_data)
         if text_data_json.get('type') == 'chat.delete_room':
             await self.delete_chat_room()
@@ -74,7 +78,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
     # Receive message from room group
     async def chat_message(self, event):
         message = event["message"]
-
+        print("메시지 전송")
         # Send message to WebSocket
         await self.send(text_data=json.dumps({"message": message}))
     
