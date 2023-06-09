@@ -50,19 +50,8 @@ class DetailPost(generics.RetrieveUpdateDestroyAPIView): # 세부정보, 수정,
         elif instance.match == 0:
             print("match=0")
             if instance.user == request.user:
-                print(request.user)
-                print("수정")
-                instance.content = request.data.get('content')
-                instance.title = request.data.get('title')
-                instance.person = request.data.get('personel')
-                serializer = self.get_serializer(instance, data=request.data, partial=partial)
-                serializer.is_valid(raise_exception=True)
-                self.perform_update(serializer)
-
-                if getattr(instance, '_prefetched_objects_cache', None):
-                    instance._prefetched_objects_cache = {}
-
-                return Response(serializer.data, status=status.HTTP_200_OK)
+                return Response({'detail': '수정 불가'},
+                                status=status.HTTP_403_FORBIDDEN)
             
             elif instance.user != request.user:
                 chat_room = ChatRoom.objects.create()
