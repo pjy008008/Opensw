@@ -64,6 +64,25 @@ const KakaoMap = () => {
     useEffect(() => {
       setIsVisible(selectedMarker === position);
     }, [selectedMarker, position]);
+
+    const putRequest = async (event) => {
+      const id = event.id;
+      const token = localStorage.getItem("token");
+      console.log(id);
+
+      const url = `http://127.0.0.1:8000/api/${id}/`;
+      console.log(url);
+      try {
+        const response = await axios.put(url, null, {
+          headers: {
+            Authorization: `Token ${token}`,
+          },
+        });
+        console.log(response.data); // 성공적인 응답 데이터 처리
+      } catch (error) {
+        console.error(error); // 오류 처리
+      }
+    };
     return (
       <div>
         {isWoman ? (
@@ -117,6 +136,7 @@ const KakaoMap = () => {
                 {/* <p className={styles.gender}>{content.gender}</p> */}
                 <p className={styles.person}>인원 : {content.person}명</p>
                 <p className={styles.major}>전공 : {content.major}</p>
+                <button onClick={() => putRequest(content)}>put요청</button>
               </div>
             </div>
           </CustomOverlayMap>
