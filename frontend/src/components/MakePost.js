@@ -24,7 +24,9 @@ const MakePost = () => {
     } else {
       console.error("Geolocation is not supported by this browser.");
     }
+    
   }, []);
+
   const onChange = (event) => {
     const { name, value } = event.target;
     if (name === "title") {

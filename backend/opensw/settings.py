@@ -173,8 +173,8 @@ ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = '/verificated'
 ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = '/verificated'
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
 
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' ##콘솔로만 확인
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  ##실제 확인
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' ##콘솔로만 확인
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  ##실제 확인
 
 
 EMAIL_HOST = 'smtp.gmail.com'

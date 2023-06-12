@@ -68,7 +68,7 @@ const ChatRoom = ({ realname, room_id }) => {
 
   return (
     <div className={styles.container}>
-      <h1 id="title">환영합니다, {username}님</h1>
+      <h1 id="title">{username}님의 채팅</h1>
       <div></div>
       <textarea
         className={styles.textfield}
