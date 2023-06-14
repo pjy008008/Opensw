@@ -81,6 +81,18 @@
   color: #02343f;
   font-weight: bold;
 }
+.deleteBtn{
+  width: 50px;
+  height: 25px;
+  margin-left: 86px;
+  margin-top: 0px;
+  border: none;
+  background-color: #f0edcc;
+  border-radius: 10px;
+  color: #02343f;
+  font-weight: bold;
+  position: absolute;
+}
 a{
   color: black;
   text-decoration: none;

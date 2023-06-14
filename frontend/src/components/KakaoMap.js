@@ -19,7 +19,7 @@ const KakaoMap = () => {
   const [post, setPost] = useState([]);
   const [selectedMarker, setSelectedMarker] = useState(null);
   const email1 = localStorage.getItem("email");
-  
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     //post model 불러오기
@@ -52,6 +52,21 @@ const KakaoMap = () => {
         console.log(error);
       });
   }, []);
+
+  const handleDelete = (id) => {
+    const token = localStorage.getItem("token");
+    axios
+      .delete(`http://127.0.0.1:8000/api/${id}/`, {
+        headers: { Authorization: `Token ${token}` },
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    window.location.reload();
+  };
 
   //Map Marker 표시하기
   const EventMarkerContainer = ({ position, content }) => {
@@ -135,6 +150,14 @@ const KakaoMap = () => {
           <CustomOverlayMap position={position}>
             <div className={styles.infowindow}>
               <div className={styles.head}>
+                {email1 === content.email && (
+                  <button
+                    className={styles.deleteBtn}
+                    onClick={() => handleDelete(content.id)}
+                  >
+                    삭제
+                  </button>
+                )}
                 <p className={styles.date}>{content.date}</p>
                 <h3 className={styles.title}>{content.title}</h3>
                 <hr className={styles.line} />
@@ -144,7 +167,6 @@ const KakaoMap = () => {
                 {/* <p className={styles.gender}>{content.gender}</p> */}
                 <p className={styles.person}>인원 : {content.person}명</p>
                 <p className={styles.major}>전공 : {content.major}</p>
-
                 {content.match === 1 ? (
                   <button className={styles.match}>
                     <Link to={`/chat/${content.roomid}`}>채팅</Link>
@@ -177,34 +199,6 @@ const KakaoMap = () => {
         maxLevel={4}
         minLevel={2}
       >
-        <Polygon
-          path={[
-            { lat: 36.626775, lng: 127.44994 },
-            { lat: 36.630072, lng: 127.450205 },
-            { lat:36.632558, lng: 127.453060 },
-            { lat: 36.633637, lng: 127.458321 },
-            { lat: 36.632762, lng: 127.456326 },
-            { lat: 36.631584, lng: 127.455570 },
-            { lat: 36.631104, lng: 127.456171 },
-            { lat: 36.632105, lng: 127.458301 },
-            { lat: 36.6307421, lng: 127.461379 },
-            { lat: 36.624614, lng: 127.463600 },
-            { lat: 36.621707, lng: 127.460375 },
-            { lat: 36.623610, lng: 127.460106 },
-            { lat: 36.623906, lng: 127.457973 },
-            { lat: 36.622523, lng: 127.456713 },
-            { lat: 36.623382, lng: 127.453744 },
-            { lat: 36.626368, lng: 127.452901
-            },
-
-          ]}
-          strokeWeight={3} // 선의 두께입니다
-          strokeColor={"#02343f"} // 선의 색깔입니다
-          strokeOpacity={0.8} // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-          strokeStyle={"solid"} // 선의 스타일입니다
-          fillColor={"#02343f"} // 채우기 색깔입니다
-          fillOpacity={0.2} // 채우기 불투명도 입니다
-        />
         {post &&
           post.map((value) => (
             <EventMarkerContainer
